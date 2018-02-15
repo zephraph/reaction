@@ -7,7 +7,7 @@ import { ContextConsumer, ContextProps, ContextProvider } from "../Components/Ar
 /**
  * A copy of the upstream interface, minus the `environment` field.
  */
-interface QueryRendererProps {
+export interface QueryRendererProps {
   cacheConfig?: CacheConfig
   query: GraphQLTaggedNode
   variables: Variables
@@ -15,7 +15,7 @@ interface QueryRendererProps {
   render(readyState: ReadyState): React.ReactElement<any> | undefined | null
 }
 
-type Props = ContextProps & QueryRendererProps
+export type Props = ContextProps & QueryRendererProps
 
 const Renderer: React.SFC<Props> = ({ currentUser, relayEnvironment, children, ...props }) => (
   <QueryRenderer {...props} environment={relayEnvironment} />

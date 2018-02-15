@@ -5,24 +5,24 @@ import { ContextConsumer, ContextProps } from "../Artsy"
 import Artists from "./Artists"
 import GeneArtworks from "./GeneArtworks"
 
-interface Filters {
+export interface Filters {
   for_sale: boolean
   dimension_range: string
   price_range: string
   medium: string
 }
 
-type Sort = "year" | "-year" | "-partner_updated_at"
+export type Sort = "year" | "-year" | "-partner_updated_at"
 
-type Mode = "artists" | "artworks"
+export type Mode = "artists" | "artworks"
 
-interface StateChangePayload {
+export interface StateChangePayload {
   filters: Filters
   sort: Sort
   mode: Mode
 }
 
-interface Props extends ContextProps {
+export interface Props extends ContextProps {
   mode: Mode
   filters?: Partial<Filters>
   geneID: string
@@ -211,3 +211,4 @@ class GeneContents extends React.Component<Props, State> {
 }
 
 export const Contents = ContextConsumer(GeneContents)
+export default Contents

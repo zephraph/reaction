@@ -1,15 +1,20 @@
 import React from "react"
-import styled from "styled-components"
+// @ts-ignore
+import styled, { StyledComponentClass } from "styled-components"
 import Icon from "../Icon"
 import Button, { ButtonProps } from "./Default"
 
 const FacebookButton = (props: ButtonProps) => {
   const icon = <Icon name="facebook" color="white" />
-  return <Button {...props} icon={icon}>{props.children || 'Log in with Facebook'}</Button>
+  return (
+    <Button {...props} icon={icon}>
+      {props.children || "Log in with Facebook"}
+    </Button>
+  )
 }
 
 export default styled(FacebookButton)`
-  background: #39439C;
+  background: #39439c;
   color: white;
   height: 40px;
   padding: 0 30px;
@@ -17,6 +22,6 @@ export default styled(FacebookButton)`
   flex-direction: row;
 
   &:hover:not(:disabled) {
-    background: #252C68;
+    background: #252c68;
   }
 `

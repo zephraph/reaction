@@ -1,11 +1,12 @@
 import React from "react"
-import styled from "styled-components"
+// @ts-ignore
+import styled, { StyledComponentClass } from "styled-components"
 import colors from "../../Assets/Colors"
-import * as fonts from "../../Assets/Fonts"
+import { primary } from "../../Assets/Fonts"
 import { block } from "../Helpers"
 import { IconProps } from "../Icon"
 
-export interface ButtonProps extends React.HTMLProps<Button> {
+export interface ButtonProps extends React.HTMLProps<DefaultButton> {
   state?: ButtonState
   block?: boolean
   icon?: React.ReactElement<IconProps>
@@ -18,7 +19,7 @@ export enum ButtonState {
   Failure,
 }
 
-class Button extends React.Component<ButtonProps, any> {
+export class DefaultButton extends React.Component<ButtonProps, any> {
   public static defaultProps: ButtonProps
 
   render(): JSX.Element {
@@ -28,19 +29,21 @@ class Button extends React.Component<ButtonProps, any> {
     delete newProps.block
     delete newProps.icon
 
-    return this.props.href
-      ? <a className={this.props.className} {...newProps}>
-          {this.props.icon}
-          <span>{this.props.children}</span>
-        </a>
-      : <button className={this.props.className} {...newProps}>
-          {this.props.icon}
-          <span>{this.props.children}</span>
-        </button>
+    return this.props.href ? (
+      <a className={this.props.className} {...newProps}>
+        {this.props.icon}
+        <span>{this.props.children}</span>
+      </a>
+    ) : (
+      <button className={this.props.className} {...newProps}>
+        {this.props.icon}
+        <span>{this.props.children}</span>
+      </button>
+    )
   }
 }
 
-export const StyledButton = styled(Button)`
+export const StyledButton = styled(DefaultButton)`
   background: ${props => {
     if (props.state === ButtonState.Success) return colors.greenRegular
     if (props.state === ButtonState.Failure) return colors.redRegular
@@ -60,7 +63,7 @@ export const StyledButton = styled(Button)`
   font-size: 13px;
   line-height: 1;
   outline: 0;
-  transition: background-color .25s,color .25s;
+  transition: background-color 0.25s, color 0.25s;
   margin: 10px;
   border: none;
   box-sizing: border-box;
@@ -76,8 +79,7 @@ export const StyledButton = styled(Button)`
     }};
   }
 
-  ${fonts.primary.style}
-  ${block()}
+  ${primary.style} ${block()};
 `
 
 StyledButton.defaultProps = {

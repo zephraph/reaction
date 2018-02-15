@@ -1,4 +1,5 @@
-import { css } from "styled-components"
+// @ts-ignore
+import { css, StyledComponentClass, Styles } from "styled-components"
 
 const primaryFontFamily = `
   'ITC Avant Garde Gothic W04',

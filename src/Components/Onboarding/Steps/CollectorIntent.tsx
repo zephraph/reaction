@@ -21,9 +21,9 @@ const OptionsContainer = styled.div`
   `};
 `
 
-type Props = StepProps & ContextProps
+export type Props = StepProps & ContextProps
 
-interface State {
+export interface State {
   selectedOptions: { [option: string]: boolean }
   error?: string
 }

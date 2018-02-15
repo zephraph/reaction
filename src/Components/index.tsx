@@ -1,11 +1,11 @@
-import MarketInsights from "./Artist/MarketInsights"
-import Artwork from "./Artwork"
+import { MarketInsightsContainer } from "./Artist/MarketInsights"
+import Artwork, { ArtworkProps } from "./Artwork"
 import ArtworkGrid from "./ArtworkGrid"
 import BorderedPulldown from "./BorderedPulldown"
 import Buttons from "./Buttons"
 import Checkbox from "./Checkbox"
 import Gene from "./Gene"
-import Grid from "./Grid"
+import { Grid } from "./Grid"
 import Icon from "./Icon"
 import Input from "./Input"
 import Modal from "./Modal/Modal"
@@ -15,7 +15,7 @@ import TextArea from "./TextArea"
 import TextLink from "./TextLink"
 import Title from "./Title"
 
-interface InitOptions {
+export interface InitOptions {
   user: User
   component: any
   domID: string
@@ -34,7 +34,7 @@ export function init(options: InitOptions) {
 }
 
 export default {
-  MarketInsights,
+  MarketInsights: MarketInsightsContainer,
   Artwork,
   Buttons,
   Modal,

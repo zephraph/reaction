@@ -1,5 +1,5 @@
 import React from "react"
-import { createFragmentContainer, graphql } from "react-relay"
+import { ComponentRef, createFragmentContainer, graphql } from "react-relay"
 import styled, { css } from "styled-components"
 
 import theme from "../../Assets/Theme"
@@ -108,7 +108,9 @@ export class Artwork extends React.Component<ArtworkProps, ArtworkState> {
       <Container onClick={this.onSelected}>
         <ImageContainer>
           <Image src={artwork.image.url} />
-          <div className={overlayClasses}>{Overlay && <Overlay selected={this.state.isSelected} />}</div>
+          <div className={overlayClasses}>
+            {Overlay && <Overlay selected={this.state.isSelected} />}
+          </div>
         </ImageContainer>
         <Metadata extended={this.props.extended} artwork={artwork} />
       </Container>
@@ -130,7 +132,7 @@ export default createFragmentContainer(
   `
 )
 
-interface RelayProps {
+export interface RelayProps {
   artwork: {
     id: string | null
     image: {
