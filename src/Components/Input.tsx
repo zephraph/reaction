@@ -17,6 +17,7 @@ export interface InputProps extends React.HTMLProps<HTMLInputElement> {
   quick?: boolean
   leftView?: JSX.Element
   rightView?: JSX.Element
+  setTouched?: (fields: { [field: string]: boolean }) => void
 }
 
 interface InputState {
@@ -52,10 +53,22 @@ interface InputState {
  *  />
  */
 class Input extends React.Component<InputProps, InputState> {
+  static defaultProps = {
+    value: "",
+  }
+
   state = {
     focused: false,
-    value: "",
+    value: (this.props.value as string) || "",
     showPassword: false,
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (this.props.name !== newProps.name) {
+      this.setState({
+        value: "",
+      })
+    }
   }
 
   onFocus = e => {
@@ -79,9 +92,16 @@ class Input extends React.Component<InputProps, InputState> {
   }
 
   onChange = e => {
+    if (this.props.setTouched) {
+      this.props.setTouched({ [this.props.name]: true })
+    }
     this.setState({
       value: e.currentTarget.value,
     })
+
+    if (this.props.onChange) {
+      this.props.onChange(e)
+    }
   }
 
   getRightViewForPassword() {
@@ -120,6 +140,8 @@ class Input extends React.Component<InputProps, InputState> {
         className,
         ref,
         type,
+        onChange,
+        setTouched,
         ...newProps
       } = this.props
       const showLabel = (!!this.state.focused || !!this.state.value) && !!label
@@ -138,8 +160,8 @@ class Input extends React.Component<InputProps, InputState> {
               {...newProps}
               onFocus={this.onFocus}
               onBlur={this.onBlur}
-              onKeyUp={this.onChange}
-              value={this.props.value}
+              onChange={this.onChange}
+              value={this.state.value}
               type={this.convertedType}
             />
             {isPassword
